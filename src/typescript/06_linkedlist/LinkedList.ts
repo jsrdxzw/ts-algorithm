@@ -76,7 +76,23 @@ class LinkedList<T> implements List<T> {
   }
 
   remove(value: T): boolean {
-    return false
+    let p = this.head
+    while (p !== null && p.item !== value) {
+      p = p.next
+    }
+    if (p === null) return false
+    if (p.prev !== null) {
+      p.prev.next = p.next
+    } else {
+      this.head = p.next
+    }
+    if (p.next !== null) {
+      p.next.prev = p.prev
+    } else {
+      this.last = p.prev
+    }
+    this.size--
+    return true
   }
 
   toString(): string {
@@ -112,4 +128,5 @@ linkedList.insertToHead('haha')
 linkedList.insertToHead('www')
 linkedList.insertToTail('zxc')
 linkedList.insertToIndex('12ooo', 0)
+linkedList.remove('12oooo')
 console.log(linkedList.toString())
