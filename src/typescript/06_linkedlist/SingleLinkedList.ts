@@ -2,7 +2,9 @@
  * 1)单链表的插入、删除、查找操作；
  * 2)链表支持任意类型数据
  */
-class SingleLinkedList<T> {
+import List from './List'
+
+class SingleLinkedList<T> implements List<T> {
   // 哨兵头节点
   private readonly head: SingleNode<T>
 
@@ -31,10 +33,11 @@ class SingleLinkedList<T> {
 
   /**
    * 向指定的位置插入节点
-   * @param newNode
+   * @param value
    * @param index
    */
-  public insertToIndex(newNode: SingleNode<T>, index: number): void {
+  public insertToIndex(value: T, index: number): void {
+    const newNode = new SingleNode(value)
     let p = this.head
     let pos = 0
     while (p.next != null && pos !== index) {
@@ -76,14 +79,13 @@ class SingleLinkedList<T> {
     this.head.next = node
   }
 
-  public printLinkedList(): string {
+  public toString(): string {
     let ret: string = ''
     let p = this.head
     while (p.next != null) {
       ret = `${ret} ${p.next.value} `
       p = p.next
     }
-    console.log(ret)
     return ret
   }
 
@@ -114,6 +116,6 @@ const singleLinkedList = new SingleLinkedList<string>()
 singleLinkedList.insertToTail('god')
 singleLinkedList.insertToTail('my')
 // console.log(singleLinkedList.printLinkedList())
-singleLinkedList.insertToIndex(new SingleNode('haha'), 1)
+singleLinkedList.insertToIndex('haha', 1)
 singleLinkedList.remove('ha1')
-singleLinkedList.printLinkedList()
+singleLinkedList.toString()
