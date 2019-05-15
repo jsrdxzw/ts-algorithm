@@ -12,7 +12,7 @@ class LinkedList<T> implements List<T> {
   findByIndex(index: number): LinkedListNode<T> | null {
     let p = this.head
     let pos = 0
-    while (p !== null && pos !== index) {
+    while (p && pos !== index) {
       p = p.next
       pos++
     }
@@ -21,7 +21,7 @@ class LinkedList<T> implements List<T> {
 
   findByValue(value: T): LinkedListNode<T> | null {
     let p = this.head
-    while (p !== null && p.item !== value) {
+    while (p && p.item !== value) {
       p = p.next
     }
     return p
@@ -31,7 +31,7 @@ class LinkedList<T> implements List<T> {
     let p = this.head
     const newNode = new LinkedListNode(value)
     // 没有元素的时候需要初始化头节点和尾节点
-    if (p === null) {
+    if (!p) {
       this.last = this.head = newNode
     } else {
       p.prev = newNode
@@ -77,16 +77,16 @@ class LinkedList<T> implements List<T> {
 
   remove(value: T): boolean {
     let p = this.head
-    while (p !== null && p.item !== value) {
+    while (p && p.item !== value) {
       p = p.next
     }
-    if (p === null) return false
-    if (p.prev !== null) {
+    if (!p) return false
+    if (p.prev) {
       p.prev.next = p.next
     } else {
       this.head = p.next
     }
-    if (p.next !== null) {
+    if (p.next) {
       p.next.prev = p.prev
     } else {
       this.last = p.prev
@@ -98,7 +98,7 @@ class LinkedList<T> implements List<T> {
   toString(): string {
     let ret: string = ''
     let p = this.head
-    while (p !== null) {
+    while (p) {
       ret = `${ret} ${p.item} `
       p = p.next
     }
