@@ -4,7 +4,7 @@
  */
 import List from './List'
 
-export class SingleLinkedList<T> implements List<T> {
+class SingleLinkedList<T> implements List<T> {
   // 哨兵头节点
   private readonly head: SingleNode<T>
 
@@ -102,7 +102,7 @@ export class SingleLinkedList<T> implements List<T> {
   }
 }
 
-export class SingleNode<T> {
+class SingleNode<T> {
   public value: T
   public next: SingleNode<T> | null
 
