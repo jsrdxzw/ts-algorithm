@@ -14,18 +14,43 @@ enum SortType {
 }
 
 interface SortAlgo {
-  sort(array: number[]): number[]
+  sort(array: number[]): void
 }
 
 class BubbleSort implements SortAlgo {
-  sort(array: number[]): number[] {
-    return []
+  sort(array: number[]) {
+    for (let i = 0; i < array.length; i++) {
+      let flag = false
+      for (let j = 0; j < array.length; j++) {
+        if (array[j] > array[j + 1]) {
+          const temp = array[j]
+          array[j] = array[j + 1]
+          array[j + 1] = temp
+          flag = true
+        }
+      }
+      if (!flag) {
+        break
+      }
+    }
   }
 }
 
 class InsertSort implements SortAlgo {
-  sort(array: number[]): number[] {
-    return []
+  sort(array: number[]) {
+    for (let i = 1; i < array.length; i++) {
+      let j = i - 1
+      const temp = array[i]
+      for (; j >= 0; j--) {
+        if (array[j] > array[j + 1]) {
+          array[j + 1] = array[j]
+        } else {
+          // 这个说明之前的已经排好了，没必要继续比较
+          break
+        }
+      }
+      array[j + 1] = temp
+    }
   }
 }
 
@@ -41,3 +66,10 @@ class SortFactory {
     }
   }
 }
+
+const insertSort = SortFactory.getSortAlgo(SortType.InsertSort)
+const test1 = [1, 0, 2, 4, 8, 5, 10]
+insertSort.sort(test1)
+console.log(test1)
+
+
